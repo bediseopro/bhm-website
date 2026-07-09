@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog Health Monitor — Know when your Shopify blog starts losing Google traffic</title>
+<meta name="description" content="Blog Health Monitor watches your Google Search Console data every week and emails you which Shopify blog posts are losing traffic, why, and what to fix.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAFAF7;
+    --ink:#111A15;
+    --ink-soft:#3D4A43;
+    --pine:#0E5C43;
+    --pine-deep:#0A4534;
+    --amber:#E8A13C;
+    --red:#D64545;
+    --gold:#C9A227;
+    --mist:#E6EBE7;
+    --card:#FFFFFF;
+    --radius:14px;
+    --font-display:"Bricolage Grotesque", system-ui, sans-serif;
+    --font-body:"Inter", system-ui, sans-serif;
+    --font-mono:"IBM Plex Mono", ui-monospace, monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-body);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--pine)}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:2px;border-radius:6px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,250,247,.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--mist);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+  .logo-mark{width:34px;height:34px;flex:none}
+  .logo-name{font-family:var(--font-display);font-weight:700;font-size:1.05rem;letter-spacing:-.01em}
+  .nav-links{display:flex;align-items:center;gap:28px;font-size:.92rem}
+  .nav-links a{color:var(--ink-soft);text-decoration:none;font-weight:500}
+  .nav-links a:hover{color:var(--pine)}
+  .btn{
+    display:inline-block;font-weight:600;text-decoration:none;
+    border-radius:999px;padding:12px 24px;font-size:.95rem;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  a.btn-primary,a.btn-primary:link,a.btn-primary:visited,a.btn-primary:hover,a.btn-primary:active{
+    background:var(--pine);color:#FFFFFF;-webkit-text-fill-color:#FFFFFF;
+    box-shadow:0 2px 0 rgba(14,92,67,.35);
+  }
+  a.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(14,92,67,.25)}
+  .btn-ghost{color:var(--ink);border:1.5px solid var(--ink);background:transparent}
+  .btn-ghost:hover{background:var(--ink);color:var(--paper)}
+  .nav .btn{padding:9px 18px}
+
+  /* ---------- hero ---------- */
+  .hero{padding:72px 0 30px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .eyebrow{
+    font-family:var(--font-mono);font-size:.78rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--pine);font-weight:500;
+    display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;
+  }
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--pine)}
+  h1{
+    font-family:var(--font-display);font-weight:800;
+    font-size:clamp(2.3rem,4.6vw,3.6rem);
+    line-height:1.05;letter-spacing:-.02em;margin-bottom:22px;
+  }
+  h1 .decay{position:relative;white-space:nowrap}
+  h1 .decay svg{position:absolute;left:0;bottom:-6px;width:100%;height:14px}
+  .hero p.lede{font-size:1.13rem;color:var(--ink-soft);max-width:34rem;margin-bottom:30px}
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+  .hero-note{font-family:var(--font-mono);font-size:.78rem;color:var(--ink-soft)}
+  .hero-note b{color:var(--pine);font-weight:500}
+
+  /* the digest email card — the product's money shot */
+  .email-stage{position:relative}
+  .pulse-bg{position:absolute;inset:-30px -10px auto -10px;z-index:0;opacity:.55}
+  .email-card{
+    position:relative;z-index:1;
+    background:var(--card);border:1px solid var(--mist);border-radius:var(--radius);
+    box-shadow:0 24px 60px -18px rgba(17,26,21,.25);
+    overflow:hidden;
+    transform:rotate(-1.2deg);
+  }
+  .email-head{
+    padding:16px 20px;border-bottom:1px solid var(--mist);
+    display:flex;align-items:center;gap:12px;background:#FCFCFA;
+  }
+  .email-avatar{
+    width:34px;height:34px;border-radius:50%;background:var(--pine);
+    color:#fff;display:flex;align-items:center;justify-content:center;
+    font-family:var(--font-display);font-weight:700;font-size:.9rem;flex:none;
+  }
+  .email-meta{font-size:.8rem;line-height:1.35}
+  .email-meta b{display:block;font-size:.86rem}
+  .email-time{margin-left:auto;font-family:var(--font-mono);font-size:.72rem;color:var(--ink-soft)}
+  .email-body{padding:20px 22px 22px}
+  .email-subject{
+    font-family:var(--font-display);font-weight:700;font-size:1.15rem;
+    letter-spacing:-.01em;margin-bottom:4px;display:flex;gap:8px;align-items:center;
+  }
+  .email-sub{font-size:.8rem;color:var(--ink-soft);margin-bottom:16px}
+  table.digest{width:100%;border-collapse:collapse;font-size:.82rem}
+  table.digest th{
+    text-align:left;font-family:var(--font-mono);font-weight:500;font-size:.68rem;
+    text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);
+    padding:6px 8px;border-bottom:1.5px solid var(--ink);
+  }
+  table.digest td{padding:9px 8px;border-bottom:1px solid var(--mist);vertical-align:top}
+  table.digest td.num{font-family:var(--font-mono);font-weight:500;text-align:right;color:var(--red)}
+  .cause{
+    display:inline-block;font-family:var(--font-mono);font-size:.68rem;
+    padding:2px 8px;border-radius:999px;white-space:nowrap;
+  }
+  .cause.rank{background:#FBEEDC;color:#8A5A12}
+  .cause.demand{background:#E4EEE9;color:var(--pine)}
+  .cause.mixed{background:#F3E9C9;color:#7A6410}
+  .email-cta{
+    margin-top:16px;display:inline-block;background:var(--pine);color:#FFFFFF;-webkit-text-fill-color:#FFFFFF;
+    font-size:.8rem;font-weight:600;padding:8px 16px;border-radius:8px;text-decoration:none;
+  }
+
+  /* ---------- stat strip ---------- */
+  .stats{padding:34px 0 8px}
+  .stat-row{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--mist);border:1px solid var(--mist);border-radius:var(--radius);overflow:hidden;
+  }
+  .stat{background:var(--card);padding:22px 26px}
+  .stat b{font-family:var(--font-display);font-size:1.7rem;font-weight:700;display:block;letter-spacing:-.02em}
+  .stat span{font-family:var(--font-mono);font-size:.74rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em}
+
+  /* ---------- sections ---------- */
+  section{padding:84px 0}
+  .sec-head{max-width:44rem;margin-bottom:48px}
+  h2{
+    font-family:var(--font-display);font-weight:700;
+    font-size:clamp(1.7rem,3vw,2.4rem);letter-spacing:-.02em;line-height:1.12;margin:14px 0 14px;
+  }
+  .sec-head p{color:var(--ink-soft);font-size:1.05rem}
+
+  /* problem section */
+  .problem{background:var(--ink);color:var(--paper);border-radius:0}
+  .problem .eyebrow{color:var(--amber)}
+  .problem .eyebrow::before{background:var(--amber)}
+  .problem h2{color:#fff}
+  .problem .sec-head p{color:#B9C4BE}
+  .decay-demo{
+    background:#18241E;border:1px solid #263229;border-radius:var(--radius);
+    padding:28px 28px 18px;position:relative;
+  }
+  .decay-demo figcaption{
+    font-family:var(--font-mono);font-size:.74rem;color:#8FA097;
+    display:flex;justify-content:space-between;margin-top:14px;flex-wrap:wrap;gap:8px;
+  }
+  .decay-legend{display:flex;gap:18px}
+  .decay-legend i{
+    font-style:normal;display:inline-flex;align-items:center;gap:6px;
+  }
+  .decay-legend i::before{content:"";width:14px;height:3px;border-radius:2px;background:var(--pine)}
+  .decay-legend i.bad::before{background:var(--red)}
+  .problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .problem-points{display:flex;flex-direction:column;gap:22px}
+  .problem-points li{list-style:none;display:flex;gap:14px;color:#D6DDD9;font-size:.98rem}
+  .problem-points li svg{flex:none;margin-top:3px}
+  .problem-points b{color:#fff}
+
+  /* four checks */
+  .checks-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .check{
+    background:var(--card);border:1px solid var(--mist);border-radius:var(--radius);
+    padding:26px;position:relative;transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .check:hover{transform:translateY(-3px);box-shadow:0 14px 34px -14px rgba(17,26,21,.2)}
+  .badge{
+    display:inline-block;font-family:var(--font-mono);font-size:.72rem;font-weight:500;
+    padding:4px 12px;border-radius:999px;margin-bottom:14px;
+  }
+  .badge.decay-b{background:#FBE3E3;color:#9E2B2B}
+  .badge.leak-b{background:#FBEEDC;color:#8A5A12}
+  .badge.broken-b{background:#FBE3E3;color:#9E2B2B}
+  .badge.thin-b{background:#F6EEC9;color:#7A6410}
+  .badge.healthy-b{background:#DDF0E4;color:var(--pine)}
+  .check h3{font-family:var(--font-display);font-weight:700;font-size:1.18rem;margin-bottom:8px;letter-spacing:-.01em}
+  .check p{color:var(--ink-soft);font-size:.94rem}
+  .check .ex{
+    margin-top:16px;font-family:var(--font-mono);font-size:.74rem;color:var(--ink-soft);
+    background:#F4F6F3;border-left:3px solid var(--mist);padding:10px 12px;border-radius:0 8px 8px 0;
+  }
+  .check .ex b{color:var(--ink);font-weight:500}
+
+  /* how it works */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:step}
+  .step{
+    background:var(--card);border:1px solid var(--mist);border-radius:var(--radius);padding:28px;
+  }
+  .step-num{
+    font-family:var(--font-mono);font-size:.74rem;color:var(--pine);
+    letter-spacing:.1em;margin-bottom:16px;display:block;
+  }
+  .step h3{font-family:var(--font-display);font-weight:700;font-size:1.1rem;margin-bottom:8px}
+  .step p{font-size:.93rem;color:var(--ink-soft)}
+  .step .art{height:120px;margin-bottom:18px;display:flex;align-items:center;justify-content:center;background:#F4F6F3;border-radius:10px}
+
+  /* pricing */
+  .pricing{background:linear-gradient(180deg,#F1F5F1 0%,var(--paper) 100%)}
+  .price-card{
+    max-width:520px;margin:0 auto;background:var(--card);
+    border:1.5px solid var(--ink);border-radius:20px;padding:40px 40px 34px;
+    box-shadow:10px 10px 0 var(--pine);text-align:left;
+  }
+  .price-line{display:flex;align-items:baseline;gap:8px;margin:6px 0 4px}
+  .price-line b{font-family:var(--font-display);font-size:3.2rem;font-weight:800;letter-spacing:-.03em}
+  .price-line span{font-family:var(--font-mono);font-size:.8rem;color:var(--ink-soft)}
+  .price-trial{font-family:var(--font-mono);font-size:.78rem;color:var(--pine);margin-bottom:22px}
+  .price-card ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin:22px 0 28px}
+  .price-card li{display:flex;gap:10px;font-size:.95rem;align-items:flex-start}
+  .price-card li svg{flex:none;margin-top:4px}
+  .price-card .btn{display:block;text-align:center}
+  .price-foot{font-size:.8rem;color:var(--ink-soft);text-align:center;margin-top:14px}
+
+  /* faq */
+  .faq{max-width:760px;margin:0 auto}
+  details{
+    border-bottom:1px solid var(--mist);padding:20px 4px;
+  }
+  details summary{
+    cursor:pointer;font-family:var(--font-display);font-weight:600;font-size:1.05rem;
+    list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;
+  }
+  details summary::-webkit-details-marker{display:none}
+  details summary::after{
+    content:"+";font-family:var(--font-mono);font-size:1.3rem;color:var(--pine);
+    transition:transform .2s ease;flex:none;
+  }
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{margin-top:12px;color:var(--ink-soft);font-size:.95rem;max-width:60ch}
+
+  /* final cta */
+  .final{
+    background:var(--pine);color:#fff;border-radius:24px;
+    padding:64px 48px;text-align:center;position:relative;overflow:hidden;
+  }
+  .final h2{color:#fff;margin-bottom:12px}
+  .final p{color:#CFE3DA;max-width:36rem;margin:0 auto 30px}
+  .final .btn-ghost{border-color:#fff;color:#fff;-webkit-text-fill-color:#fff}
+  .final .btn-ghost:hover{background:#fff;color:var(--pine);-webkit-text-fill-color:var(--pine)}
+  .final .pulse-line{position:absolute;left:0;right:0;bottom:-8px;opacity:.25}
+
+  footer{padding:44px 0 56px;border-top:1px solid var(--mist);margin-top:84px}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:.88rem;color:var(--ink-soft)}
+  .foot a{color:var(--ink-soft);text-decoration:none;margin-left:22px}
+  .foot a:hover{color:var(--pine)}
+
+  @media (max-width:900px){
+    .hero-grid,.problem-grid{grid-template-columns:1fr;gap:40px}
+    .checks-grid,.steps{grid-template-columns:1fr}
+    .stat-row{grid-template-columns:1fr}
+    .nav-links a:not(.btn){display:none}
+    .email-card{transform:none}
+    section{padding:60px 0}
+    .final{padding:48px 24px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#" aria-label="Blog Health Monitor home">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="37" height="37" rx="9" stroke="#111A15" stroke-width="3"/>
+        <path d="M7 24 L13 24 L16 14 L20 30 L24 20 L27 24 L33 24" stroke="#0E5C43" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <span class="logo-name">Blog Health Monitor</span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#checks">What it checks</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-primary" href="#pricing">Start free trial</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">For Shopify stores that blog</span>
+      <h1>Know the moment your blog starts <span class="decay">losing Google traffic<svg viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><path d="M2 4 C60 12, 140 0, 298 9" stroke="#D64545" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></span>.</h1>
+      <p class="lede">Blog Health Monitor watches your Google Search Console data every week and emails you exactly which posts are slipping, why it's happening, and what to fix — before months of content work quietly disappears from search.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#pricing">Start your free trial</a>
+        <a class="btn btn-ghost" href="#how">See how it works</a>
+      </div>
+      <p class="hero-note">Installs from Shopify in <b>2 minutes</b> · Connects to Search Console in <b>one click</b> · No Google Analytics needed</p>
+    </div>
+
+    <div class="email-stage">
+      <svg class="pulse-bg" viewBox="0 0 480 220" fill="none" aria-hidden="true">
+        <path d="M0 60 L90 60 L110 30 L135 95 L160 60 L250 60 L270 80 L300 110 L340 130 L400 160 L480 185"
+              stroke="url(#pg)" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <defs>
+          <linearGradient id="pg" x1="0" y1="0" x2="480" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0.45" stop-color="#0E5C43"/><stop offset="0.75" stop-color="#E8A13C"/><stop offset="1" stop-color="#D64545"/>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <figure class="email-card" role="img" aria-label="Example weekly alert email listing blog pages losing Google traffic">
+        <div class="email-head">
+          <div class="email-avatar">B</div>
+          <div class="email-meta"><b>Blog Health Monitor</b>to you</div>
+          <span class="email-time">Mon 8:00 AM</span>
+        </div>
+        <div class="email-body">
+          <div class="email-subject">⚠️ 6 blog pages losing Google traffic</div>
+          <p class="email-sub">Comparing the last 28 days to the previous 28 days on your store.</p>
+          <table class="digest">
+            <thead><tr><th>Page</th><th style="text-align:right">Clicks lost</th><th>Likely cause</th></tr></thead>
+            <tbody>
+              <tr><td>best-mobility-scooters-for-seniors…</td><td class="num">−41</td><td><span class="cause rank">Ranking slip</span></td></tr>
+              <tr><td>airline-scooter-travel-policy</td><td class="num">−28</td><td><span class="cause mixed">Mixed</span></td></tr>
+              <tr><td>winter-storage-guide</td><td class="num">−17</td><td><span class="cause demand">Demand drop</span></td></tr>
+            </tbody>
+          </table>
+          <span class="email-cta">Open full report →</span>
+        </div>
+      </figure>
+    </div>
+  </div>
+
+  <div class="wrap stats">
+    <div class="stat-row">
+      <div class="stat"><b>1,000+</b><span>pages analyzed per scan</span></div>
+      <div class="stat"><b>28-day</b><span>trend comparison, every week</span></div>
+      <div class="stat"><b>4 checks</b><span>decay · leaks · broken links · thin content</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM ============ -->
+<section class="problem" id="problem">
+  <div class="wrap problem-grid">
+    <div>
+      <span class="eyebrow">The problem</span>
+      <h2>Content decay is silent. By the time you notice, the traffic is gone.</h2>
+      <ul class="problem-points">
+        <li>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="8" stroke="#E8A13C" stroke-width="2"/><path d="M9 5v5" stroke="#E8A13C" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="13" r="1" fill="#E8A13C"/></svg>
+          <span><b>Rankings slip a position at a time.</b> A post drops from #4 to #7 and loses half its clicks — with no error, no alert, nothing in your Shopify dashboard.</span>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="8" stroke="#E8A13C" stroke-width="2"/><path d="M9 5v5" stroke="#E8A13C" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="13" r="1" fill="#E8A13C"/></svg>
+          <span><b>Nobody re-checks old posts.</b> You published it, it ranked, you moved on. Google kept re-evaluating it every day since.</span>
+        </li>
+        <li>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="8" stroke="#E8A13C" stroke-width="2"/><path d="M9 5v5" stroke="#E8A13C" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="13" r="1" fill="#E8A13C"/></svg>
+          <span><b>Search Console has the answer — buried.</b> The data exists, but comparing every page across time windows by hand takes hours you don't have.</span>
+        </li>
+      </ul>
+    </div>
+    <figure class="decay-demo">
+      <svg viewBox="0 0 440 200" fill="none" role="img" aria-label="Chart of a blog post's weekly Google clicks declining over six months">
+        <g stroke="#2A3830" stroke-width="1">
+          <line x1="40" y1="30" x2="430" y2="30"/><line x1="40" y1="75" x2="430" y2="75"/>
+          <line x1="40" y1="120" x2="430" y2="120"/><line x1="40" y1="165" x2="430" y2="165"/>
+        </g>
+        <text x="10" y="34" fill="#8FA097" font-size="10" font-family="IBM Plex Mono">300</text>
+        <text x="10" y="124" fill="#8FA097" font-size="10" font-family="IBM Plex Mono">150</text>
+        <path d="M40 45 L90 40 L140 48 L190 44 L215 52" stroke="#3BAE84" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M215 52 L250 70 L290 95 L330 118 L380 142 L430 158" stroke="#D64545" stroke-width="3" stroke-linecap="round" fill="none" stroke-dasharray="0"/>
+        <circle cx="215" cy="52" r="5" fill="#E8A13C"/>
+        <g>
+          <rect x="180" y="8" width="150" height="24" rx="6" fill="#E8A13C"/>
+          <text x="192" y="24" fill="#111A15" font-size="11" font-family="IBM Plex Mono" font-weight="500">decay detected here</text>
+        </g>
+        <line x1="215" y1="32" x2="215" y2="47" stroke="#E8A13C" stroke-width="2"/>
+      </svg>
+      <figcaption>
+        <span>weekly Google clicks · one blog post · 6 months</span>
+        <span class="decay-legend"><i>healthy</i><i class="bad">decaying</i></span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ FOUR CHECKS ============ -->
+<section id="checks">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">What it checks</span>
+      <h2>Four health checks. Every post. Every week.</h2>
+      <p>Each scan reads your blog and your Search Console data, then labels every post the way an SEO consultant would — automatically.</p>
+    </div>
+    <div class="checks-grid">
+      <article class="check">
+        <span class="badge decay-b">Traffic decay</span>
+        <h3>Catches posts losing Google clicks</h3>
+        <p>Compares the last 28 days of search clicks to the previous 28 for every page, flags the decliners, and diagnoses the likely cause: a ranking slip, a demand drop, or a mix.</p>
+        <div class="ex"><b>−41 clicks</b> · slipped from position 4 → 7 · <b>likely cause: ranking slip</b></div>
+      </article>
+      <article class="check">
+        <span class="badge leak-b">Money leak</span>
+        <h3>Finds posts that earn readers but sell nothing</h3>
+        <p>A post pulling in traffic with zero links to your products or collections is leaking revenue. Every scan lists them so each popular post pulls its commercial weight.</p>
+        <div class="ex">2,300 words · 480 monthly readers · <b>0 product links</b></div>
+      </article>
+      <article class="check">
+        <span class="badge broken-b">Broken link</span>
+        <h3>Flags links to deleted products and dead pages</h3>
+        <p>Products get discontinued, URLs change, and old posts keep pointing at them. Broken links frustrate readers and waste SEO value — the scan finds every one.</p>
+        <div class="ex">links to <b>/products/discontinued-model-x</b> · 404 not found</div>
+      </article>
+      <article class="check">
+        <span class="badge thin-b">Thin content</span>
+        <h3>Spots posts too short to rank</h3>
+        <p>Pages under 300 words rarely rank and can drag down how Google rates your whole site. The scan flags them so you can expand, merge, or retire them.</p>
+        <div class="ex"><b>34 words</b> · below the 300-word threshold · expand or consolidate</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">How it works</span>
+      <h2>Set it up once. It watches every week after that.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="art">
+          <svg width="150" height="84" viewBox="0 0 150 84" fill="none" aria-hidden="true">
+            <rect x="20" y="10" width="110" height="64" rx="8" stroke="#111A15" stroke-width="2.5"/>
+            <rect x="34" y="26" width="48" height="8" rx="4" fill="#0E5C43"/>
+            <rect x="34" y="42" width="82" height="6" rx="3" fill="#E6EBE7"/>
+            <rect x="34" y="54" width="62" height="6" rx="3" fill="#E6EBE7"/>
+            <circle cx="112" cy="30" r="9" fill="#0E5C43"/><path d="M108 30l3 3 5-6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <span class="step-num">STEP 01</span>
+        <h3>Install from Shopify</h3>
+        <p>Add Blog Health Monitor to your store like any other app. It runs inside your Shopify admin — nothing touches your theme or slows your storefront.</p>
+      </div>
+      <div class="step">
+        <div class="art">
+          <svg width="150" height="84" viewBox="0 0 150 84" fill="none" aria-hidden="true">
+            <circle cx="46" cy="42" r="20" stroke="#111A15" stroke-width="2.5"/>
+            <text x="38" y="48" font-size="16" font-family="Bricolage Grotesque" font-weight="700" fill="#0E5C43">G</text>
+            <path d="M70 42 h20" stroke="#E8A13C" stroke-width="2.5" stroke-dasharray="4 4"/>
+            <rect x="94" y="24" width="36" height="36" rx="8" stroke="#111A15" stroke-width="2.5"/>
+            <path d="M101 46 l6-10 5 7 4-5 6 8" stroke="#0E5C43" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <span class="step-num">STEP 02</span>
+        <h3>Connect Search Console in one click</h3>
+        <p>Sign in with Google and pick your site. The app reads your search data — read-only — so it can see how every blog page performs. No Google Analytics required.</p>
+      </div>
+      <div class="step">
+        <div class="art">
+          <svg width="150" height="84" viewBox="0 0 150 84" fill="none" aria-hidden="true">
+            <rect x="30" y="16" width="90" height="56" rx="8" stroke="#111A15" stroke-width="2.5"/>
+            <path d="M32 20 L75 48 L118 20" stroke="#111A15" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+            <circle cx="118" cy="20" r="11" fill="#D64545"/>
+            <text x="114" y="25" font-size="12" font-family="IBM Plex Mono" fill="#fff">6</text>
+          </svg>
+        </div>
+        <span class="step-num">STEP 03</span>
+        <h3>Get a weekly health report</h3>
+        <p>Every week the app re-scans everything and emails you only what needs attention — which pages, how many clicks lost, and the likely cause. No news is good news.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="pricing" id="pricing">
+  <div class="wrap">
+    <div class="sec-head" style="text-align:center;margin-left:auto;margin-right:auto">
+      <span class="eyebrow" style="justify-content:center">Pricing</span>
+      <h2>One plan. Less than an hour of an SEO consultant's time.</h2>
+      <p>A single content audit costs $150–$500. Blog Health Monitor audits every post, every week, for a flat monthly price.</p>
+    </div>
+    <div class="price-card">
+      <span class="badge healthy-b">Everything included</span>
+      <div class="price-line"><b>$19</b><span>/ month · billed through Shopify</span></div>
+      <p class="price-trial">14-day free trial · cancel anytime in one click</p>
+      <ul>
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#0E5C43"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Automatic weekly scans of your entire blog — unlimited posts</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#0E5C43"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Traffic decay detection with per-page cause diagnosis</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#0E5C43"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Money-leak, broken-link, and thin-content checks</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#0E5C43"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Weekly email alerts, plus on-demand scans anytime</li>
+        <li><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#0E5C43"/><path d="M4.5 8l2.5 2.5 4.5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Built by an SEO professional who does this for client sites daily</li>
+      </ul>
+      <a class="btn btn-primary" href="#">Start your 14-day free trial</a>
+      <p class="price-foot">Billed securely through your Shopify account. No card details ever touch our servers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head" style="text-align:center;margin-left:auto;margin-right:auto">
+      <span class="eyebrow" style="justify-content:center">FAQ</span>
+      <h2>Questions merchants ask</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Do I need Google Analytics for this to work?</summary>
+        <p>No. Blog Health Monitor uses Google Search Console, which is free and focused on exactly one thing: how your pages perform in Google Search. If your store isn't on Search Console yet, setting it up takes about ten minutes and we point you to Google's official guide.</p>
+      </details>
+      <details>
+        <summary>What data does the app access?</summary>
+        <p>Two things: your blog posts (via Shopify, to check links and content) and your Search Console performance data (read-only — clicks, impressions, and positions for your own pages). We never modify your site, never access customer data, and never share or sell any data. Full details are in our <a href="privacy.html">privacy policy</a>.</p>
+      </details>
+      <details>
+        <summary>Will it slow down my store?</summary>
+        <p>No. The app runs entirely outside your storefront — nothing is added to your theme, no scripts load for your visitors. Scans run on our servers against Shopify's and Google's APIs.</p>
+      </details>
+      <details>
+        <summary>My blog has hundreds of posts. Can it handle that?</summary>
+        <p>Yes — every scan covers your entire blog, whether that's 10 posts or 1,000. Weekly scans run automatically in the background, so size never becomes your problem.</p>
+      </details>
+      <details>
+        <summary>What do I do when a post is flagged?</summary>
+        <p>Each alert includes the likely cause, which tells you the fix: a ranking slip usually calls for a content refresh, a money leak means adding relevant product links, broken links need updating or removing, and thin posts should be expanded or merged. You stay in control — the app diagnoses, you decide.</p>
+      </details>
+      <details>
+        <summary>How do I cancel?</summary>
+        <p>Uninstall the app from your Shopify admin at any time — billing stops immediately through Shopify, and your data is deleted from our systems. No emails to send, no hoops.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section style="padding-top:20px">
+  <div class="wrap">
+    <div class="final">
+      <svg class="pulse-line" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 30 L200 30 L230 10 L260 50 L290 30 L500 30 L530 15 L560 45 L590 30 L1200 30" stroke="#fff" stroke-width="2" fill="none"/>
+      </svg>
+      <h2>Your next traffic drop is already starting somewhere.</h2>
+      <p>Find out which post it is this week — not three months from now in a quarterly report.</p>
+      <a class="btn btn-ghost" href="#pricing">Start your free trial</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Blog Health Monitor · Built by Bedi SEO</span>
+    <nav aria-label="Footer">
+      <a href="privacy.html">Privacy policy</a>
+      <a href="mailto:bediseopro@gmail.com">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

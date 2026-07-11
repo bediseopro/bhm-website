@@ -35,9 +35,10 @@
   .nav-links a:hover{color:var(--pine)}
   .btn{display:inline-block;font-family:var(--font-body);font-weight:600;font-size:.95rem;text-decoration:none;border-radius:999px;padding:12px 26px;transition:transform .15s ease, box-shadow .15s ease;cursor:pointer;border:none}
   .btn:hover{transform:translateY(-1px)}
-  .btn-primary{background:var(--pine);color:#fff;box-shadow:0 2px 0 var(--pine-deep)}
+  a.btn-primary,a.btn-primary:link,a.btn-primary:visited,a.btn-primary:hover,a.btn-primary:active,.btn-primary{background:var(--pine);color:#fff !important;box-shadow:0 2px 0 var(--pine-deep)}
   .btn-primary:hover{box-shadow:0 4px 14px rgba(14,92,67,.35)}
-  .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+  a.btn-ghost,a.btn-ghost:link,a.btn-ghost:visited,.btn-ghost{background:transparent;color:var(--ink) !important;border:1.5px solid var(--ink)}
+  .final a.btn-primary,.final a.btn-primary:link,.final a.btn-primary:visited,.final a.btn-primary:hover{background:#fff;color:var(--pine-deep) !important}
   .btn-sm{padding:9px 20px;font-size:.88rem}
   @media(max-width:760px){.nav-links a:not(.btn){display:none}}
 

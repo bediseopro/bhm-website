@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ad creative 1 — diagnostic slip</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pine:#0E5C43;
+    --amber:#E8A13C;
+    --paper:#FAFAF7;
+    --ink:#111A15;
+    --mist:#E6EBE7;
+    --slate:#5C6B63;
+    --alert:#C2410C;
+    --display:"Bricolage Grotesque",Georgia,serif;
+    --body:"Inter",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#555;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:var(--body);}
+
+  /* 1080 x 1350 — Meta feed portrait */
+  .ad{width:1080px;height:1350px;background:var(--pine);position:relative;overflow:hidden;
+      display:flex;flex-direction:column;padding:70px 72px 64px;}
+
+  .top{display:flex;align-items:center;gap:18px;}
+  .mark{width:56px;height:56px;border-radius:15px;object-fit:cover;display:block;}
+  .brand{font-family:var(--display);font-weight:800;font-size:27px;color:var(--paper);letter-spacing:-.3px;}
+
+  .head{margin-top:46px;font-family:var(--display);font-weight:800;font-size:62px;line-height:1.04;
+        letter-spacing:-1.8px;color:var(--paper);max-width:15em;}
+  .head em{font-style:normal;color:var(--amber);}
+
+  .slip{margin-top:46px;background:#fff;border-radius:20px;overflow:hidden;
+        box-shadow:0 30px 70px -30px rgba(0,0,0,.5);flex:1;display:flex;flex-direction:column;}
+  .slip-head{background:var(--ink);color:var(--paper);padding:22px 34px;display:flex;align-items:baseline;}
+  .slip-head .t{font-family:var(--display);font-weight:600;font-size:25px;letter-spacing:-.2px;}
+  .slip-head .d{margin-left:auto;font-family:var(--mono);font-size:17px;color:#9AA5A0;}
+  .slip-body{padding:12px 34px;flex:1;display:flex;flex-direction:column;justify-content:center;}
+  .line{display:flex;align-items:baseline;gap:24px;padding:20px 0;border-bottom:1px dotted var(--mist);}
+  .line:last-child{border-bottom:none;}
+  .line .n{font-family:var(--mono);font-weight:600;font-size:46px;color:var(--alert);
+           min-width:132px;letter-spacing:-1.4px;}
+  .line .l{font-size:26px;line-height:1.25;color:var(--ink);font-weight:500;}
+  .slip-foot{margin:0 34px;padding:24px 0 30px;border-top:3px solid var(--ink);display:flex;align-items:baseline;}
+  .slip-foot .lbl{font-family:var(--mono);font-size:17px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);}
+  .slip-foot .tot{margin-left:auto;font-family:var(--display);font-weight:800;font-size:52px;letter-spacing:-1.6px;color:var(--ink);}
+
+  .foot{margin-top:38px;font-family:var(--mono);font-size:22px;color:#B7D6C8;letter-spacing:.02em;}
+</style>
+</head>
+<body>
+
+<div class="ad">
+  <div class="top">
+    <img class="mark" src="app-icon-1200.png" alt="">
+    <span class="brand">Blog Health Monitor</span>
+  </div>
+
+  <h1 class="head">One Shopify blog. <em>1,172 problems.</em></h1>
+
+  <div class="slip">
+    <div class="slip-head">
+      <span class="t">Blog Health Report</span>
+      <span class="d">574 posts scanned</span>
+    </div>
+    <div class="slip-body">
+      <div class="line"><span class="n">295</span><span class="l">Broken links</span></div>
+      <div class="line"><span class="n">575</span><span class="l">Images with no alt text</span></div>
+      <div class="line"><span class="n">202</span><span class="l">Missing meta descriptions</span></div>
+      <div class="line"><span class="n">78</span><span class="l">Money leaks</span></div>
+      <div class="line"><span class="n">22</span><span class="l">Broken images</span></div>
+    </div>
+    <div class="slip-foot">
+      <span class="lbl">Issues found</span>
+      <span class="tot">1,172</span>
+    </div>
+  </div>
+
+  <p class="foot">The owner had no idea. Scan yours free.</p>
+</div>
+
+</body>
+</html>

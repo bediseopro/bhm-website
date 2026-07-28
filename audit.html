@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Free Shopify Blog SEO Audit — Blog Health Monitor</title>
 <meta name="description" content="Find out what's quietly costing your Shopify blog Google traffic. Free audit — broken links, missing alt text, meta tags and traffic decay.">
+
+<link rel="icon" type="image/png" href="/app-icon-1200.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Shopify Blog SEO Audit">
+<meta property="og:description" content="Find out what's quietly costing your Shopify blog Google traffic. Free audit — broken links, missing alt text, meta tags and traffic decay.">
+<meta property="og:image" content="https://bloghealthmonitor.com/app-icon-1200.png">
+<meta property="og:url" content="https://bloghealthmonitor.com/audit.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Shopify Blog SEO Audit">
+<meta name="twitter:description" content="Find out what's quietly costing your Shopify blog Google traffic.">
+<meta name="twitter:image" content="https://bloghealthmonitor.com/app-icon-1200.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -33,7 +45,7 @@
   /* ---------- masthead ---------- */
   .masthead{padding:26px 0;border-bottom:1px solid var(--mist);}
   .masthead .wrap{display:flex;align-items:center;gap:13px;}
-  .mark{width:40px;height:40px;border-radius:11px;background:var(--pine);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .mark{width:40px;height:40px;border-radius:11px;object-fit:cover;flex-shrink:0;display:block;}
   .wordmark{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.2px;}
   .byline{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--slate);letter-spacing:.02em;}
 
@@ -125,13 +137,11 @@
   }
 </style>
 </head>
-<body>
+<body id="top">
 
 <header class="masthead">
   <div class="wrap">
-    <span class="mark" aria-hidden="true">
-      <svg width="22" height="22" viewBox="0 0 30 30" fill="none"><path d="M3 18H9L12 9L18 23L21 15H27" stroke="#FAFAF7" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </span>
+    <img class="mark" src="/app-icon-1200.png" alt="" width="40" height="40">
     <span class="wordmark">Blog Health Monitor</span>
     <span class="byline">by Bedi SEO</span>
   </div>
@@ -144,7 +154,7 @@
       <h1>Your blog took years to build. <em>It's leaking traffic right now.</em></h1>
       <p class="lede">Old posts break quietly — links die, images vanish, meta tags go missing — and Google stops sending readers. Send me your store and I'll show you exactly what's broken, post by post. No charge, no obligation.</p>
 
-      <form class="form" action="https://formspree.io/f/xrenjlqn" method="POST">
+      <form class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
         <div class="field">
           <label for="store">Your store URL</label>
           <input id="store" name="store" type="text" placeholder="yourstore.myshopify.com" required autocomplete="url">

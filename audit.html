@@ -3,18 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Free Shopify Blog SEO Audit — Blog Health Monitor</title>
-<meta name="description" content="Find out what's quietly costing your Shopify blog Google traffic. Free audit — broken links, missing alt text, meta tags and traffic decay.">
+<title>Free Shopify Blog SEO Scan — Blog Health Monitor</title>
+<meta name="description" content="See what's quietly costing your Shopify blog Google traffic. Scan every post free — broken links, missing alt text, meta tags and traffic decay.">
 
 <link rel="icon" type="image/png" href="/app-icon-1200.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Free Shopify Blog SEO Audit">
-<meta property="og:description" content="Find out what's quietly costing your Shopify blog Google traffic. Free audit — broken links, missing alt text, meta tags and traffic decay.">
+<meta property="og:title" content="Free Shopify Blog SEO Scan">
+<meta property="og:description" content="See what's quietly costing your Shopify blog Google traffic. Scan every post free — broken links, missing alt text, meta tags and traffic decay.">
 <meta property="og:image" content="https://bloghealthmonitor.com/app-icon-1200.png">
 <meta property="og:url" content="https://bloghealthmonitor.com/audit.html">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Free Shopify Blog SEO Audit">
-<meta name="twitter:description" content="Find out what's quietly costing your Shopify blog Google traffic.">
+<meta name="twitter:title" content="Free Shopify Blog SEO Scan">
+<meta name="twitter:description" content="See what's quietly costing your Shopify blog Google traffic.">
 <meta name="twitter:image" content="https://bloghealthmonitor.com/app-icon-1200.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,18 +58,15 @@
   h1 em{font-style:normal;color:var(--pine);}
   .lede{margin-top:22px;font-size:19px;line-height:1.55;color:var(--slate);max-width:35em;}
 
-  /* ---------- form ---------- */
-  .form{margin-top:34px;max-width:440px;}
-  .field+.field{margin-top:14px;}
-  label{display:block;font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--slate);margin-bottom:7px;}
-  input{width:100%;font-family:var(--body);font-size:16.5px;color:var(--ink);background:#fff;border:1.5px solid var(--mist);border-radius:10px;padding:14px 15px;transition:border-color .15s ease;}
-  input::placeholder{color:#A6B1AA;}
-  input:hover{border-color:#CBD6CF;}
-  input:focus{border-color:var(--pine);outline:none;box-shadow:0 0 0 3px rgba(14,92,67,.12);}
-  button{margin-top:20px;width:100%;font-family:var(--display);font-weight:700;font-size:17.5px;letter-spacing:-.2px;color:var(--paper);background:var(--pine);border:none;border-radius:10px;padding:16px 20px;cursor:pointer;transition:background .15s ease,transform .1s ease;}
-  button:hover{background:var(--pine-deep);}
-  button:active{transform:translateY(1px);}
-  .microcopy{margin-top:13px;font-size:14px;color:var(--slate);}
+  /* ---------- primary call to action ---------- */
+  .cta{margin-top:34px;}
+  .cta .go{display:inline-block;font-family:var(--display);font-weight:700;font-size:18.5px;letter-spacing:-.2px;color:var(--paper);background:var(--pine);border-radius:10px;padding:17px 30px;text-decoration:none;transition:background .15s ease,transform .1s ease;}
+  .cta .go:hover{background:var(--pine-deep);}
+  .cta .go:active{transform:translateY(1px);}
+  .reassure{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--mono);font-size:12.5px;color:var(--slate);letter-spacing:.02em;}
+  .reassure span{display:flex;align-items:center;gap:7px;}
+  .reassure span::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--amber);flex-shrink:0;}
+  .microcopy{margin-top:15px;font-size:14.5px;color:var(--slate);max-width:34em;}
 
   /* ---------- signature: the diagnostic slip ---------- */
   .slip{background:#fff;border:1px solid var(--mist);border-radius:14px;box-shadow:0 18px 44px -26px rgba(17,26,21,.30);overflow:hidden;position:relative;padding-bottom:34px;}
@@ -101,8 +98,25 @@
   .check h3{font-family:var(--display);font-weight:600;font-size:17.5px;letter-spacing:-.2px;margin-bottom:5px;}
   .check p{font-size:15px;color:var(--slate);line-height:1.5;}
 
+  /* ---------- fix demo ---------- */
+  .fix{padding:72px 0;}
+  .fix h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,2.7vw,33px);letter-spacing:-.8px;margin-bottom:8px;}
+  .fix .sub{color:var(--slate);margin-bottom:34px;max-width:44em;}
+  .rows{display:grid;gap:14px;max-width:760px;}
+  .row{border:1px solid var(--mist);border-radius:11px;padding:16px 18px;background:#fff;display:flex;align-items:flex-start;gap:14px;}
+  .row.before{background:#FEF4F1;border-color:#F6DDD4;}
+  .row.after{background:#F2F8F5;border-color:#D6E7DE;}
+  .row .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;padding:4px 8px;border-radius:5px;flex-shrink:0;margin-top:2px;}
+  .row.before .tag{background:#F6DDD4;color:var(--alert);}
+  .row.after .tag{background:#D6E7DE;color:var(--pine);}
+  .row .txt{font-size:15.5px;line-height:1.45;min-width:0;}
+  .row .txt b{font-weight:600;}
+  .row .txt code{font-family:var(--mono);font-size:13.5px;color:var(--slate);word-break:break-all;}
+  .row .txt small{display:block;color:var(--slate);font-size:13.5px;margin-top:3px;}
+  .fix .note{margin-top:22px;font-size:15px;color:var(--slate);max-width:44em;}
+
   /* ---------- proof ---------- */
-  .proof{padding:72px 0;}
+  .proof{padding:0 0 72px;}
   .proof .wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
   .quotebox{border-left:3px solid var(--amber);padding-left:26px;}
   .quotebox h2{font-family:var(--display);font-weight:700;font-size:clamp(25px,2.6vw,32px);line-height:1.14;letter-spacing:-.8px;}
@@ -130,7 +144,7 @@
     .hero .wrap,.proof .wrap{grid-template-columns:1fr;gap:44px;}
     .checks{grid-template-columns:1fr;}
     .hero{padding:52px 0 60px;}
-    .form{max-width:none;}
+    .cta .go{display:block;text-align:center;}
   }
   @media (prefers-reduced-motion:reduce){
     *{transition:none!important;animation:none!important;scroll-behavior:auto!important;}
@@ -150,25 +164,22 @@
 <section class="hero">
   <div class="wrap">
     <div>
-      <p class="eyebrow">Free blog audit</p>
+      <p class="eyebrow">Free 14-day trial</p>
       <h1>Your blog took years to build. <em>It's leaking traffic right now.</em></h1>
-      <p class="lede">Old posts break quietly — links die, images vanish, meta tags go missing — and Google stops sending readers. Send me your store and I'll show you exactly what's broken, post by post. No charge, no obligation.</p>
+      <p class="lede">Old posts break quietly — links die, images vanish, meta tags go missing — and Google stops sending readers. Blog Health Monitor scans every post on your Shopify blog and shows you exactly what's broken, then fixes most of it in one click.</p>
 
-      <form class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <div class="field">
-          <label for="store">Your store URL</label>
-          <input id="store" name="store" type="text" placeholder="yourstore.myshopify.com" required autocomplete="url">
+      <div class="cta">
+        <a class="go" href="https://apps.shopify.com/blog-health-monitor">Scan my blog free</a>
+        <div class="reassure">
+          <span>Results in minutes</span>
+          <span>No credit card</span>
+          <span>Cancel anytime</span>
         </div>
-        <div class="field">
-          <label for="email">Where should I send the audit?</label>
-          <input id="email" name="email" type="email" placeholder="you@yourstore.com" required autocomplete="email">
-        </div>
-        <button type="submit">Send me my free audit</button>
-        <p class="microcopy">You'll get your results within one business day. I read every one myself.</p>
-      </form>
+        <p class="microcopy">Installs on your Shopify store in about a minute. The first scan runs on its own — you'll see your numbers before you decide anything.</p>
+      </div>
     </div>
 
-    <aside class="slip" aria-label="Example audit result">
+    <aside class="slip" aria-label="Example scan result">
       <div class="slip-head">
         <span class="t">Blog Health Report</span>
         <span class="d">574 posts scanned</span>
@@ -192,8 +203,8 @@
 
 <section class="band">
   <div class="wrap">
-    <h2>What the audit checks</h2>
-    <p class="sub">The same seven checks I run for paying clients — across every post on your blog, not a sample.</p>
+    <h2>What the scan checks</h2>
+    <p class="sub">Seven checks across every post on your blog, not a sample. Then a weekly re-scan, so nothing rots quietly again.</p>
     <div class="checks">
       <div class="check">
         <h3>Traffic decay</h3>
@@ -223,6 +234,33 @@
   </div>
 </section>
 
+<section class="fix">
+  <div class="wrap">
+    <h2>Finding the problem is the easy part</h2>
+    <p class="sub">Plenty of tools hand you a list. This one repairs the post for you — the exact link, inside the exact article, without touching anything around it.</p>
+
+    <div class="rows">
+      <div class="row before">
+        <span class="tag">Before</span>
+        <span class="txt">
+          <b>Mobility Scooter for Adults</b>
+          <code>https://yourstore.com/products/shoprider-sunrunner-4</code>
+          <small>Broken product link — appears 4 times in this post</small>
+        </span>
+      </div>
+      <div class="row after">
+        <span class="tag">After</span>
+        <span class="txt">
+          <b>Mobility Scooter for Adults</b>
+          <small>Applied: replaced with /products/afikim-afiscooter-solar — all 4 occurrences updated</small>
+        </span>
+      </div>
+    </div>
+
+    <p class="note">Alt text, meta descriptions and SEO titles work the same way: you see the suggestion, you approve it, it's written to your store. Nothing changes without you clicking.</p>
+  </div>
+</section>
+
 <section class="proof">
   <div class="wrap">
     <div class="quotebox">
@@ -240,10 +278,10 @@
 
 <section class="close">
   <div class="wrap">
-    <h2>Already know your blog needs work?</h2>
-    <p>Skip the audit and start scanning yourself. Blog Health Monitor installs on your Shopify store in a minute, finds everything above, and fixes most of it in one click — alt text, meta descriptions, SEO titles, broken links and dead images.</p>
+    <h2>See your own numbers in the next ten minutes.</h2>
+    <p>Install Blog Health Monitor, connect nothing, wait for the first scan. You'll get the same report you've just read — for your blog, with your posts named. If it finds nothing worth fixing, uninstall and you've lost ten minutes.</p>
     <a class="btn" href="https://apps.shopify.com/blog-health-monitor">Install on Shopify — 14-day free trial</a>
-    <p class="alt">Or <a href="#top">get the free audit first</a>. Either way you'll see the same numbers.</p>
+    <p class="alt">Questions first? <a href="mailto:bediseopro@gmail.com">Email me</a> — I answer them myself.</p>
   </div>
 </section>
 

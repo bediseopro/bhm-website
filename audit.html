@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free Shopify Blog SEO Audit — Blog Health Monitor</title>
+<meta name="description" content="Find out what's quietly costing your Shopify blog Google traffic. Free audit — broken links, missing alt text, meta tags and traffic decay.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pine:#0E5C43;
+    --pine-deep:#0A4231;
+    --amber:#E8A13C;
+    --paper:#FAFAF7;
+    --ink:#111A15;
+    --mist:#E6EBE7;
+    --slate:#5C6B63;
+    --alert:#C2410C;
+    --display:"Bricolage Grotesque",Georgia,serif;
+    --body:"Inter",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  a{color:var(--pine);}
+  :focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:4px;}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- masthead ---------- */
+  .masthead{padding:26px 0;border-bottom:1px solid var(--mist);}
+  .masthead .wrap{display:flex;align-items:center;gap:13px;}
+  .mark{width:40px;height:40px;border-radius:11px;background:var(--pine);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .wordmark{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.2px;}
+  .byline{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--slate);letter-spacing:.02em;}
+
+  /* ---------- hero ---------- */
+  .hero{padding:76px 0 84px;}
+  .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:start;}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--pine);display:flex;align-items:center;gap:9px;margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--amber);}
+  h1{font-family:var(--display);font-weight:800;font-size:clamp(38px,4.6vw,58px);line-height:1.03;letter-spacing:-1.6px;}
+  h1 em{font-style:normal;color:var(--pine);}
+  .lede{margin-top:22px;font-size:19px;line-height:1.55;color:var(--slate);max-width:35em;}
+
+  /* ---------- form ---------- */
+  .form{margin-top:34px;max-width:440px;}
+  .field+.field{margin-top:14px;}
+  label{display:block;font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--slate);margin-bottom:7px;}
+  input{width:100%;font-family:var(--body);font-size:16.5px;color:var(--ink);background:#fff;border:1.5px solid var(--mist);border-radius:10px;padding:14px 15px;transition:border-color .15s ease;}
+  input::placeholder{color:#A6B1AA;}
+  input:hover{border-color:#CBD6CF;}
+  input:focus{border-color:var(--pine);outline:none;box-shadow:0 0 0 3px rgba(14,92,67,.12);}
+  button{margin-top:20px;width:100%;font-family:var(--display);font-weight:700;font-size:17.5px;letter-spacing:-.2px;color:var(--paper);background:var(--pine);border:none;border-radius:10px;padding:16px 20px;cursor:pointer;transition:background .15s ease,transform .1s ease;}
+  button:hover{background:var(--pine-deep);}
+  button:active{transform:translateY(1px);}
+  .microcopy{margin-top:13px;font-size:14px;color:var(--slate);}
+
+  /* ---------- signature: the diagnostic slip ---------- */
+  .slip{background:#fff;border:1px solid var(--mist);border-radius:14px;box-shadow:0 18px 44px -26px rgba(17,26,21,.30);overflow:hidden;position:relative;padding-bottom:34px;}
+  .slip::after{ /* torn receipt edge */
+    content:"";position:absolute;left:0;right:0;bottom:-1px;height:12px;pointer-events:none;
+    background:repeating-linear-gradient(135deg,var(--paper) 0 7px,transparent 7px 14px);}
+  .slip-head{background:var(--pine);color:var(--paper);padding:17px 22px;display:flex;align-items:baseline;gap:10px;}
+  .slip-head .t{font-family:var(--display);font-weight:700;font-size:16px;letter-spacing:-.1px;}
+  .slip-head .d{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:#9FCBB9;}
+  .slip-sub{padding:13px 22px;border-bottom:1px solid var(--mist);font-family:var(--mono);font-size:12px;color:var(--slate);letter-spacing:.02em;}
+  .slip-body{padding:8px 22px 26px;}
+  .line{display:flex;align-items:baseline;gap:14px;padding:13px 0;border-bottom:1px dotted var(--mist);}
+  .line:last-child{border-bottom:none;}
+  .line .n{font-family:var(--mono);font-weight:600;font-size:24px;color:var(--alert);min-width:64px;letter-spacing:-.5px;}
+  .line .n.ok{color:var(--pine);}
+  .line .l{font-size:15.5px;line-height:1.35;}
+  .line .l small{display:block;color:var(--slate);font-size:13.5px;margin-top:2px;}
+  .slip-foot{margin:0 22px;padding:16px 0 4px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:12px;}
+  .slip-foot .lbl{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--slate);}
+  .slip-foot .tot{margin-left:auto;font-family:var(--display);font-weight:800;font-size:27px;letter-spacing:-.8px;}
+  .slip-note{margin:16px 22px 0;font-family:var(--mono);font-size:12px;color:var(--slate);text-align:center;line-height:1.6;}
+
+  /* ---------- checks band ---------- */
+  .band{border-top:1px solid var(--mist);border-bottom:1px solid var(--mist);background:#fff;padding:66px 0;}
+  .band h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,2.7vw,33px);letter-spacing:-.8px;margin-bottom:8px;}
+  .band .sub{color:var(--slate);margin-bottom:38px;max-width:44em;}
+  .checks{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 34px;}
+  .check{padding-top:17px;border-top:2px solid var(--pine);}
+  .check h3{font-family:var(--display);font-weight:600;font-size:17.5px;letter-spacing:-.2px;margin-bottom:5px;}
+  .check p{font-size:15px;color:var(--slate);line-height:1.5;}
+
+  /* ---------- proof ---------- */
+  .proof{padding:72px 0;}
+  .proof .wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  .quotebox{border-left:3px solid var(--amber);padding-left:26px;}
+  .quotebox h2{font-family:var(--display);font-weight:700;font-size:clamp(25px,2.6vw,32px);line-height:1.14;letter-spacing:-.8px;}
+  .quotebox p{margin-top:16px;color:var(--slate);}
+  .statgrid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--mist);border:1px solid var(--mist);border-radius:12px;overflow:hidden;}
+  .stat{background:var(--paper);padding:24px 22px;}
+  .stat .v{font-family:var(--mono);font-weight:600;font-size:30px;letter-spacing:-1px;color:var(--pine);}
+  .stat .k{font-size:14px;color:var(--slate);margin-top:3px;line-height:1.35;}
+
+  /* ---------- closing ---------- */
+  .close{background:var(--pine);color:var(--paper);padding:70px 0;}
+  .close h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,3vw,38px);letter-spacing:-1px;max-width:16em;}
+  .close p{margin-top:16px;color:#B7D6C8;max-width:38em;}
+  .close .btn{display:inline-block;margin-top:28px;font-family:var(--display);font-weight:700;font-size:17px;color:var(--pine);background:var(--paper);border-radius:10px;padding:15px 26px;text-decoration:none;}
+  .close .btn:hover{background:#fff;}
+  .close .alt{margin-top:16px;font-size:14.5px;color:#9FCBB9;}
+  .close .alt a{color:var(--paper);}
+
+  /* ---------- footer ---------- */
+  footer{padding:34px 0;font-size:14px;color:var(--slate);}
+  footer .wrap{display:flex;gap:22px;flex-wrap:wrap;align-items:center;}
+  footer .sp{margin-left:auto;}
+
+  @media (max-width:900px){
+    .hero .wrap,.proof .wrap{grid-template-columns:1fr;gap:44px;}
+    .checks{grid-template-columns:1fr;}
+    .hero{padding:52px 0 60px;}
+    .form{max-width:none;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important;scroll-behavior:auto!important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <span class="mark" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 30 30" fill="none"><path d="M3 18H9L12 9L18 23L21 15H27" stroke="#FAFAF7" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+    <span class="wordmark">Blog Health Monitor</span>
+    <span class="byline">by Bedi SEO</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Free blog audit</p>
+      <h1>Your blog took years to build. <em>It's leaking traffic right now.</em></h1>
+      <p class="lede">Old posts break quietly — links die, images vanish, meta tags go missing — and Google stops sending readers. Send me your store and I'll show you exactly what's broken, post by post. No charge, no obligation.</p>
+
+      <form class="form" action="https://formspree.io/f/xrenjlqn" method="POST">
+        <div class="field">
+          <label for="store">Your store URL</label>
+          <input id="store" name="store" type="text" placeholder="yourstore.myshopify.com" required autocomplete="url">
+        </div>
+        <div class="field">
+          <label for="email">Where should I send the audit?</label>
+          <input id="email" name="email" type="email" placeholder="you@yourstore.com" required autocomplete="email">
+        </div>
+        <button type="submit">Send me my free audit</button>
+        <p class="microcopy">You'll get your results within one business day. I read every one myself.</p>
+      </form>
+    </div>
+
+    <aside class="slip" aria-label="Example audit result">
+      <div class="slip-head">
+        <span class="t">Blog Health Report</span>
+        <span class="d">574 posts scanned</span>
+      </div>
+      <p class="slip-sub">SAMPLE — a real Shopify store, anonymised</p>
+      <div class="slip-body">
+        <div class="line"><span class="n">295</span><span class="l">Broken links<small>Dead product and article URLs still linked in posts</small></span></div>
+        <div class="line"><span class="n">575</span><span class="l">Images with no alt text<small>Invisible to image search and screen readers</small></span></div>
+        <div class="line"><span class="n">202</span><span class="l">Missing meta descriptions<small>Google writes its own from the post body</small></span></div>
+        <div class="line"><span class="n">78</span><span class="l">Money leaks<small>Posts with real traffic linking to no products</small></span></div>
+        <div class="line"><span class="n">22</span><span class="l">Broken images<small>Blank spaces where photos used to load</small></span></div>
+      </div>
+      <div class="slip-foot">
+        <span class="lbl">Issues found</span>
+        <span class="tot">1,172</span>
+      </div>
+      <p class="slip-note">Every one of these was fixable.<br>Most owners had no idea they existed.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>What the audit checks</h2>
+    <p class="sub">The same seven checks I run for paying clients — across every post on your blog, not a sample.</p>
+    <div class="checks">
+      <div class="check">
+        <h3>Traffic decay</h3>
+        <p>Which posts are losing Google clicks, and whether it's a ranking slip or falling demand.</p>
+      </div>
+      <div class="check">
+        <h3>Broken links &amp; images</h3>
+        <p>Every dead URL and missing image still sitting in your published posts.</p>
+      </div>
+      <div class="check">
+        <h3>Missing alt text</h3>
+        <p>Images invisible to image search — and to customers using screen readers.</p>
+      </div>
+      <div class="check">
+        <h3>Meta tags</h3>
+        <p>Missing, duplicated, or over-length descriptions and titles Google will truncate.</p>
+      </div>
+      <div class="check">
+        <h3>Money leaks</h3>
+        <p>Posts earning real readers while linking to nothing you sell.</p>
+      </div>
+      <div class="check">
+        <h3>Thin content</h3>
+        <p>Pages too slight to rank, dragging on the rest of the blog.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof">
+  <div class="wrap">
+    <div class="quotebox">
+      <h2>I'm an SEO consultant. I built this because I was fixing the same things by hand, every week.</h2>
+      <p>Every client blog had the same rot: dead links from products that sold out, images lost in a theme migration, hundreds of posts with no meta description. Finding it took days. Fixing it took longer. So I built the tool I wanted — and now it does both.</p>
+    </div>
+    <div class="statgrid">
+      <div class="stat"><div class="v">574</div><div class="k">posts scanned in one pass</div></div>
+      <div class="stat"><div class="v">1,172</div><div class="k">issues found on one blog</div></div>
+      <div class="stat"><div class="v">1 click</div><div class="k">to fix most of them</div></div>
+      <div class="stat"><div class="v">Weekly</div><div class="k">re-scan, emailed to you</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap">
+    <h2>Already know your blog needs work?</h2>
+    <p>Skip the audit and start scanning yourself. Blog Health Monitor installs on your Shopify store in a minute, finds everything above, and fixes most of it in one click — alt text, meta descriptions, SEO titles, broken links and dead images.</p>
+    <a class="btn" href="https://apps.shopify.com/blog-health-monitor">Install on Shopify — 14-day free trial</a>
+    <p class="alt">Or <a href="#top">get the free audit first</a>. Either way you'll see the same numbers.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Bedi SEO</span>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <span class="sp">bediseopro@gmail.com</span>
+  </div>
+</footer>
+
+</body>
+</html>

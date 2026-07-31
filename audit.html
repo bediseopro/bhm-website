@@ -6,8 +6,18 @@
 <title>Free Shopify Blog SEO Scan — Blog Health Monitor</title>
 <meta name="description" content="See what's quietly costing your Shopify blog Google traffic. Scan every post free — broken links, missing alt text, meta tags and traffic decay.">
 
+<link rel="icon" type="image/png" href="/app-icon-1200.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Shopify Blog SEO Scan">
+<meta property="og:description" content="See what's quietly costing your Shopify blog Google traffic. Scan every post free — broken links, missing alt text, meta tags and traffic decay.">
+<meta property="og:image" content="https://bloghealthmonitor.com/app-icon-1200.png">
+<meta property="og:url" content="https://bloghealthmonitor.com/audit.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free Shopify Blog SEO Scan">
+<meta name="twitter:description" content="See what's quietly costing your Shopify blog Google traffic.">
+<meta name="twitter:image" content="https://bloghealthmonitor.com/app-icon-1200.png">
 
-  <script>
+ <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -22,16 +32,6 @@ fbq('track', 'PageView');
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=856618501824386&ev=PageView&noscript=1"
 /></noscript>
-<link rel="icon" type="image/png" href="/app-icon-1200.png">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Free Shopify Blog SEO Scan">
-<meta property="og:description" content="See what's quietly costing your Shopify blog Google traffic. Scan every post free — broken links, missing alt text, meta tags and traffic decay.">
-<meta property="og:image" content="https://bloghealthmonitor.com/app-icon-1200.png">
-<meta property="og:url" content="https://bloghealthmonitor.com/audit.html">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Free Shopify Blog SEO Scan">
-<meta name="twitter:description" content="See what's quietly costing your Shopify blog Google traffic.">
-<meta name="twitter:image" content="https://bloghealthmonitor.com/app-icon-1200.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,7 +76,7 @@ src="https://www.facebook.com/tr?id=856618501824386&ev=PageView&noscript=1"
 
   /* ---------- primary call to action ---------- */
   .cta{margin-top:34px;}
-  .cta .go{display:inline-block;font-family:var(--display);font-weight:700;font-size:18.5px;letter-spacing:-.2px;color:var(--paper);background:var(--pine);border-radius:10px;padding:17px 30px;text-decoration:none;transition:background .15s ease,transform .1s ease;}
+  .cta .go{display:inline-block;font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.2px;color:var(--paper);background:var(--pine);border-radius:10px;padding:17px 30px;text-decoration:none;transition:background .15s ease,transform .1s ease;}
   .cta .go:hover{background:var(--pine-deep);}
   .cta .go:active{transform:translateY(1px);}
   .reassure{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--mono);font-size:12.5px;color:var(--slate);letter-spacing:.02em;}
@@ -86,8 +86,7 @@ src="https://www.facebook.com/tr?id=856618501824386&ev=PageView&noscript=1"
 
   /* ---------- signature: the diagnostic slip ---------- */
   .slip{background:#fff;border:1px solid var(--mist);border-radius:14px;box-shadow:0 18px 44px -26px rgba(17,26,21,.30);overflow:hidden;position:relative;padding-bottom:34px;}
-  .slip::after{ /* torn receipt edge */
-    content:"";position:absolute;left:0;right:0;bottom:-1px;height:12px;pointer-events:none;
+  .slip::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:12px;pointer-events:none;
     background:repeating-linear-gradient(135deg,var(--paper) 0 7px,transparent 7px 14px);}
   .slip-head{background:var(--pine);color:var(--paper);padding:17px 22px;display:flex;align-items:baseline;gap:10px;}
   .slip-head .t{font-family:var(--display);font-weight:700;font-size:16px;letter-spacing:-.1px;}
@@ -97,7 +96,6 @@ src="https://www.facebook.com/tr?id=856618501824386&ev=PageView&noscript=1"
   .line{display:flex;align-items:baseline;gap:14px;padding:13px 0;border-bottom:1px dotted var(--mist);}
   .line:last-child{border-bottom:none;}
   .line .n{font-family:var(--mono);font-weight:600;font-size:24px;color:var(--alert);min-width:64px;letter-spacing:-.5px;}
-  .line .n.ok{color:var(--pine);}
   .line .l{font-size:15.5px;line-height:1.35;}
   .line .l small{display:block;color:var(--slate);font-size:13.5px;margin-top:2px;}
   .slip-foot{margin:0 22px;padding:16px 0 4px;border-top:2px solid var(--ink);display:flex;align-items:baseline;gap:12px;}
@@ -114,10 +112,18 @@ src="https://www.facebook.com/tr?id=856618501824386&ev=PageView&noscript=1"
   .check h3{font-family:var(--display);font-weight:600;font-size:17.5px;letter-spacing:-.2px;margin-bottom:5px;}
   .check p{font-size:15px;color:var(--slate);line-height:1.5;}
 
-  /* ---------- fix demo ---------- */
-  .fix{padding:72px 0;}
-  .fix h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,2.7vw,33px);letter-spacing:-.8px;margin-bottom:8px;}
-  .fix .sub{color:var(--slate);margin-bottom:34px;max-width:44em;}
+  /* ---------- video ---------- */
+  .demo{padding:72px 0 66px;}
+  .demo h2{font-family:var(--display);font-weight:700;font-size:clamp(26px,2.7vw,33px);letter-spacing:-.8px;margin-bottom:8px;}
+  .demo .sub{color:var(--slate);margin-bottom:32px;max-width:44em;}
+  .frame{position:relative;width:100%;max-width:860px;aspect-ratio:16/9;border-radius:16px;overflow:hidden;
+         border:1px solid var(--mist);background:#0A0F0C;box-shadow:0 26px 60px -34px rgba(17,26,21,.40);}
+  .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  .demo .caption{margin-top:16px;font-family:var(--mono);font-size:13px;color:var(--slate);letter-spacing:.02em;}
+
+  /* ---------- fix rows ---------- */
+  .fix{padding:0 0 72px;}
+  .fix h3{font-family:var(--display);font-weight:600;font-size:20px;letter-spacing:-.3px;margin-bottom:18px;}
   .rows{display:grid;gap:14px;max-width:760px;}
   .row{border:1px solid var(--mist);border-radius:11px;padding:16px 18px;background:#fff;display:flex;align-items:flex-start;gap:14px;}
   .row.before{background:#FEF4F1;border-color:#F6DDD4;}
@@ -131,13 +137,23 @@ src="https://www.facebook.com/tr?id=856618501824386&ev=PageView&noscript=1"
   .row .txt small{display:block;color:var(--slate);font-size:13.5px;margin-top:3px;}
   .fix .note{margin-top:22px;font-size:15px;color:var(--slate);max-width:44em;}
 
+  /* ---------- founder ---------- */
+  .founder{border-top:1px solid var(--mist);background:#fff;padding:70px 0;}
+  .founder .wrap{display:grid;grid-template-columns:250px 1fr;gap:52px;align-items:start;}
+  .portrait{width:100%;max-width:250px;aspect-ratio:1/1;object-fit:cover;border-radius:16px;
+            border:1px solid var(--mist);box-shadow:0 20px 46px -30px rgba(17,26,21,.36);display:block;}
+  .portrait-name{margin-top:16px;}
+  .portrait-name b{display:block;font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.2px;}
+  .portrait-name span{font-family:var(--mono);font-size:12.5px;color:var(--slate);letter-spacing:.02em;}
+  .founder h2{font-family:var(--display);font-weight:700;font-size:clamp(24px,2.5vw,31px);line-height:1.15;letter-spacing:-.8px;margin-bottom:18px;}
+  .founder p{color:var(--slate);margin-bottom:15px;}
+  .founder p:last-child{margin-bottom:0;}
+  .founder .sig{margin-top:22px;padding-left:20px;border-left:3px solid var(--amber);font-size:16px;color:var(--ink);}
+  .founder .sig a{font-weight:500;}
+
   /* ---------- proof ---------- */
-  .proof{padding:0 0 72px;}
-  .proof .wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
-  .quotebox{border-left:3px solid var(--amber);padding-left:26px;}
-  .quotebox h2{font-family:var(--display);font-weight:700;font-size:clamp(25px,2.6vw,32px);line-height:1.14;letter-spacing:-.8px;}
-  .quotebox p{margin-top:16px;color:var(--slate);}
-  .statgrid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--mist);border:1px solid var(--mist);border-radius:12px;overflow:hidden;}
+  .proof{padding:66px 0;}
+  .statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--mist);border:1px solid var(--mist);border-radius:12px;overflow:hidden;}
   .stat{background:var(--paper);padding:24px 22px;}
   .stat .v{font-family:var(--mono);font-weight:600;font-size:30px;letter-spacing:-1px;color:var(--pine);}
   .stat .k{font-size:14px;color:var(--slate);margin-top:3px;line-height:1.35;}
@@ -157,8 +173,11 @@ src="https://www.facebook.com/tr?id=856618501824386&ev=PageView&noscript=1"
   footer .sp{margin-left:auto;}
 
   @media (max-width:900px){
-    .hero .wrap,.proof .wrap{grid-template-columns:1fr;gap:44px;}
+    .hero .wrap{grid-template-columns:1fr;gap:44px;}
+    .founder .wrap{grid-template-columns:1fr;gap:30px;}
+    .portrait{max-width:180px;}
     .checks{grid-template-columns:1fr;}
+    .statgrid{grid-template-columns:1fr 1fr;}
     .hero{padding:52px 0 60px;}
     .cta .go{display:block;text-align:center;}
   }
@@ -185,7 +204,7 @@ src="https://www.facebook.com/tr?id=856618501824386&ev=PageView&noscript=1"
       <p class="lede">Old posts break quietly — links die, images vanish, meta tags go missing — and Google stops sending readers. Blog Health Monitor scans every post on your Shopify blog and shows you exactly what's broken, then fixes most of it in one click.</p>
 
       <div class="cta">
-        <a class="go" href="https://apps.shopify.com/blog-health-monitor" onclick="if(window.fbq)fbq('track','Lead')">Scan my blog free</a>
+        <a class="go" href="https://apps.shopify.com/blog-health-monitor" onclick="if(window.fbq)fbq('track','Lead')">Install on Shopify — 14-day free trial</a>
         <div class="reassure">
           <span>Results in minutes</span>
           <span>No credit card</span>
@@ -203,14 +222,14 @@ src="https://www.facebook.com/tr?id=856618501824386&ev=PageView&noscript=1"
       <p class="slip-sub">SAMPLE — a real Shopify store, anonymised</p>
       <div class="slip-body">
         <div class="line"><span class="n">295</span><span class="l">Broken links<small>Dead product and article URLs still linked in posts</small></span></div>
-        <div class="line"><span class="n">575</span><span class="l">Images with no alt text<small>Invisible to image search and screen readers</small></span></div>
         <div class="line"><span class="n">202</span><span class="l">Missing meta descriptions<small>Google writes its own from the post body</small></span></div>
+        <div class="line"><span class="n">109</span><span class="l">Thin content<small>Pages too slight to rank on their own</small></span></div>
+        <div class="line"><span class="n">84</span><span class="l">Images with no alt text<small>Invisible to image search and screen readers</small></span></div>
         <div class="line"><span class="n">78</span><span class="l">Money leaks<small>Posts with real traffic linking to no products</small></span></div>
-        <div class="line"><span class="n">22</span><span class="l">Broken images<small>Blank spaces where photos used to load</small></span></div>
       </div>
       <div class="slip-foot">
         <span class="lbl">Issues found</span>
-        <span class="tot">1,172</span>
+        <span class="tot">768</span>
       </div>
       <p class="slip-note">Every one of these was fixable.<br>Most owners had no idea they existed.</p>
     </aside>
@@ -250,11 +269,27 @@ src="https://www.facebook.com/tr?id=856618501824386&ev=PageView&noscript=1"
   </div>
 </section>
 
+<section class="demo">
+  <div class="wrap">
+    <h2>See it work before you install</h2>
+    <p class="sub">Finding the problem is the easy part. Watch a broken link get repaired inside a real post — you approve the suggestion, the app writes it to your store, and nothing around it is touched.</p>
+
+    <div class="frame">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/1I8l54mzzMU?rel=0&amp;modestbranding=1"
+        title="Blog Health Monitor — product walkthrough"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen></iframe>
+    </div>
+    <p class="caption">Recorded on a real Shopify store. No editing tricks.</p>
+  </div>
+</section>
+
 <section class="fix">
   <div class="wrap">
-    <h2>Finding the problem is the easy part</h2>
-    <p class="sub">Plenty of tools hand you a list. This one repairs the post for you — the exact link, inside the exact article, without touching anything around it.</p>
-
+    <h3>What a fix looks like</h3>
     <div class="rows">
       <div class="row before">
         <span class="tag">Before</span>
@@ -272,20 +307,33 @@ src="https://www.facebook.com/tr?id=856618501824386&ev=PageView&noscript=1"
         </span>
       </div>
     </div>
-
     <p class="note">Alt text, meta descriptions and SEO titles work the same way: you see the suggestion, you approve it, it's written to your store. Nothing changes without you clicking.</p>
+  </div>
+</section>
+
+<section class="founder">
+  <div class="wrap">
+    <div>
+      <img class="portrait" src="/Harjeet%20Bedi.png" alt="Harjeet Bedi, founder of Blog Health Monitor">
+      <div class="portrait-name">
+        <b>Harjeet Bedi</b>
+        <span>SEO consultant · Bedi SEO</span>
+      </div>
+    </div>
+    <div>
+      <h2>I built this because I was fixing the same things by hand, every week.</h2>
+      <p>I've spent years doing SEO for ecommerce stores, and every client blog had the same rot: dead links from products that sold out, images lost in a theme migration, hundreds of posts with no meta description. Finding it took days. Fixing it took longer.</p>
+      <p>So I built the tool I wanted — one that scans every post in a single pass, tells you exactly what's wrong, and repairs most of it when you say so. Nothing is changed on your store without your approval, and every edit is surgical: the broken link is replaced, and not one character around it moves.</p>
+      <p class="sig">I read every support email myself. If something looks wrong, or you just want to know whether this is worth your time — <a href="mailto:bediseopro@gmail.com">write to me</a>.</p>
+    </div>
   </div>
 </section>
 
 <section class="proof">
   <div class="wrap">
-    <div class="quotebox">
-      <h2>I'm an SEO consultant. I built this because I was fixing the same things by hand, every week.</h2>
-      <p>Every client blog had the same rot: dead links from products that sold out, images lost in a theme migration, hundreds of posts with no meta description. Finding it took days. Fixing it took longer. So I built the tool I wanted — and now it does both.</p>
-    </div>
     <div class="statgrid">
       <div class="stat"><div class="v">574</div><div class="k">posts scanned in one pass</div></div>
-      <div class="stat"><div class="v">1,172</div><div class="k">issues found on one blog</div></div>
+      <div class="stat"><div class="v">768</div><div class="k">issues found on one blog</div></div>
       <div class="stat"><div class="v">1 click</div><div class="k">to fix most of them</div></div>
       <div class="stat"><div class="v">Weekly</div><div class="k">re-scan, emailed to you</div></div>
     </div>
@@ -295,7 +343,7 @@ src="https://www.facebook.com/tr?id=856618501824386&ev=PageView&noscript=1"
 <section class="close">
   <div class="wrap">
     <h2>See your own numbers in the next ten minutes.</h2>
-    <p>Install Blog Health Monitor, connect nothing, wait for the first scan. You'll get the same report you've just read — for your blog, with your posts named. If it finds nothing worth fixing, uninstall and you've lost ten minutes.</p>
+    <p>Install Blog Health Monitor and wait for the first scan. You'll get the same report you've just read — for your blog, with your posts named. If it finds nothing worth fixing, uninstall and you've lost ten minutes.</p>
     <a class="btn" href="https://apps.shopify.com/blog-health-monitor" onclick="if(window.fbq)fbq('track','Lead')">Install on Shopify — 14-day free trial</a>
     <p class="alt">Questions first? <a href="mailto:bediseopro@gmail.com">Email me</a> — I answer them myself.</p>
   </div>

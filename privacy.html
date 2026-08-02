@@ -73,7 +73,7 @@
 <section class="head">
   <div class="wrap">
     <h1>Privacy Policy</h1>
-    <p class="dates">Effective 1 August 2026 · Previous version 9 July 2026</p>
+    <p class="dates">Effective 2 August 2026 · Previous version 1 August 2026</p>
     <p class="intro">This policy explains what Blog Health Monitor reads from your Shopify store, what it changes, when it changes it, and what happens to that information.</p>
   </div>
 </section>
@@ -89,28 +89,29 @@
   <ul>
     <li><strong>Read blog content</strong> — your blog posts, their HTML, images, links, tags and SEO fields. This is how the app scans for issues.</li>
     <li><strong>Read products</strong> — used to match broken links and broken images against products that still exist in your catalogue, so replacements can be suggested accurately, and to check product and collection pages for the same SEO issues the app finds in blog posts.</li>
-    <li><strong>Write blog content</strong> — used only to apply a fix that you have explicitly approved. See <a href="#modify">How we modify your content</a>.</li>
+    <li><strong>Edit products</strong> — used only to apply a product or collection fix that you have explicitly approved: an SEO title, a meta description, or image alt text. See <a href="#modify">Changes we make to your store</a>.</li>
+    <li><strong>Write blog content</strong> — used only to apply a blog fix that you have explicitly approved. See <a href="#modify">Changes we make to your store</a>.</li>
   </ul>
   <p>The app does not request or receive access to your orders, your customers, payment information, or any other part of your store.</p>
 
-  <h2 id="modify">How we modify your content</h2>
-  <p>Blog Health Monitor can make changes to your blog posts. It does so <strong>only when you click to apply a specific fix</strong>, and only to the item shown in that fix. The app never edits your content automatically, in the background, on a schedule, or as part of a scan.</p>
+  <h2 id="modify">Changes we make to your store</h2>
+  <p>Blog Health Monitor can make changes to your store's content, but <strong>only changes you approve</strong>. When the app detects an issue it may generate a suggested fix — repaired links, image alt text, meta titles and descriptions for blog posts, and SEO titles, descriptions and image alt text for products and collections. Every suggestion is shown to you first; nothing is ever written to your store without you reviewing and applying it. The app never edits your content automatically, in the background, on a schedule, or as part of a scan.</p>
   <p>The changes the app can make are limited to:</p>
   <ul>
-    <li>adding alt text to an image that has none;</li>
-    <li>setting or replacing a post's meta description or SEO title;</li>
-    <li>replacing the destination of a broken link, or removing the link while leaving the surrounding text in place;</li>
-    <li>repairing or removing a broken image reference, including malformed responsive image (<code>srcset</code>) entries.</li>
+    <li>adding alt text to a blog image, product image or collection image that has none;</li>
+    <li>setting or replacing the meta description or SEO title of a blog post, product or collection;</li>
+    <li>replacing the destination of a broken link in a blog post, or removing the link while leaving the surrounding text in place;</li>
+    <li>repairing or removing a broken image reference in a blog post, including malformed responsive image (<code>srcset</code>) entries.</li>
   </ul>
-  <p>Each change is applied as a targeted edit to the specific element concerned. The app does not rewrite, reformat or regenerate the body of your posts, and it does not delete posts.</p>
-  <p>You can review the exact text of any AI-generated fix before applying it, and you can reverse any change from your Shopify admin in the usual way. Removing the app from your store stops all future access immediately; changes already applied to your content remain, because they are your content.</p>
+  <p>Each change is applied as a targeted edit to the specific element concerned, made through Shopify's official API under the permissions you granted at install. On products and collections the app edits only those SEO fields and image alt text — it never rewrites a product description, and it never touches prices, inventory or availability. It does not rewrite, reformat or regenerate the body of your blog posts, and it does not delete anything.</p>
+  <p>You can review and edit the exact text of any suggested fix before applying it, and you can edit or revert any applied change in your Shopify admin at any time. Removing the app from your store stops all future access immediately; changes already applied to your content remain, because they are your content.</p>
 
   <div class="callout">
-    <p><strong>Products and collections.</strong> The app currently <strong>reads</strong> your products and collections to report SEO issues — such as a missing meta description or a product image with no alt text — but it does not change them. Those findings link you to the relevant page in your Shopify admin, where you can edit them yourself.</p>
+    <p><strong>What the app can never touch.</strong> Orders, customers, payment settings, prices, inventory, themes and store settings are outside the app's permissions entirely — Shopify does not allow the app to read or change them.</p>
   </div>
 
   <h2>AI processing</h2>
-  <p>When you request an AI-generated fix — alt text, a meta description, an SEO title, or the selection of a replacement URL for a broken link — the relevant part of the blog post is sent to Anthropic's API to generate that text. Only the content needed for that fix is sent.</p>
+  <p>When you request an AI-generated fix — alt text, a meta description, an SEO title, or the selection of a replacement URL for a broken link — the content needed for that fix is sent to Anthropic's API to generate the text: the title and relevant text of the blog post, product or collection concerned, and, for alt text, the image itself. Only the content needed for that fix is sent.</p>
   <p>Anthropic processes this content to return a result. Anthropic's handling of API data is governed by its own commercial terms and privacy policy, which you can review at <a href="https://www.anthropic.com/legal/commercial-terms" rel="noopener">anthropic.com/legal/commercial-terms</a>.</p>
   <p>Generated text is stored in our database so that it can be shown to you, re-used instead of making a second request, and counted against your monthly fix allowance.</p>
 
@@ -122,7 +123,7 @@
   <ul>
     <li>Your shop domain and the access token Shopify issues at installation.</li>
     <li>Scan results — the findings for each post, product and collection, and the counts shown on your dashboard.</li>
-    <li>Fixes you have generated or applied, including the generated text and the time it was applied.</li>
+    <li>Fixes and suggestions the app has generated — including the generated text, whether you applied them, and when.</li>
     <li>Your notification email address and weekly report settings, if you enable them.</li>
     <li>Your plan and trial status, as reported by Shopify.</li>
   </ul>
@@ -152,6 +153,7 @@
 
   <h2>Changes to this policy</h2>
   <p>We will update this page when the app's behaviour changes, and the effective date above will reflect the most recent revision.</p>
+  <p><strong>2 August 2026:</strong> updated to cover fixes applied to products and collections — SEO titles, meta descriptions and image alt text — which the app can now change with your approval under the "Edit products" permission. A previous version said the app read, but did not change, products and collections.</p>
   <p><strong>1 August 2026:</strong> updated to describe the app's ability to apply fixes to blog content, the AI processing involved in generating those fixes, and the reading of product and collection data. A previous version of this policy described the app as read-only, which no longer reflects how it works.</p>
 
   <div class="contact">
